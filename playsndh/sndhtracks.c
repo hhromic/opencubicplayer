@@ -137,7 +137,7 @@ static int sndhTrackIProcessKey (struct cpifaceSessionAPI_t *cpifaceSession, uin
 			break;
 		case 't': case 'T':
 			sndhTrackActive = 1;
-			cpifaceSession->cpiTextSetMode (cpifaceSession, "sndhTrack");
+			cpifaceSession->cpiTextSetMode (cpifaceSession, "sndhTrck");
 			return 1;
 		case 'x': case 'X':
 			sndhTrackActive = 1;
@@ -205,7 +205,7 @@ static int sndhTrackEvent (struct cpifaceSessionAPI_t *cpifaceSession, int ev)
 }
 
 
-static struct cpitextmoderegstruct cpiSndhTrack = {"sndhTrack", sndhTrackGetWin, sndhTrackSetWin, sndhTrackDraw, sndhTrackIProcessKey, sndhTrackAProcessKey, sndhTrackEvent CPITEXTMODEREGSTRUCT_TAIL};
+static struct cpitextmoderegstruct cpiSndhTrack = {"sndhTrck", sndhTrackGetWin, sndhTrackSetWin, sndhTrackDraw, sndhTrackIProcessKey, sndhTrackAProcessKey, sndhTrackEvent CPITEXTMODEREGSTRUCT_TAIL};
 
 OCP_INTERNAL void sndhTrackInit (struct cpifaceSessionAPI_t *cpifaceSession)
 {

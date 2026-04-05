@@ -130,6 +130,11 @@ static void cpiSetFocus (struct cpifaceSessionAPI_t *cpifaceSession, const char 
 
 void cpiTextSetMode (struct cpifaceSessionAPI_t *cpifaceSession, const char *name)
 {
+	if (strlen (name) >= sizeof (cpiFocusHandle))
+	{
+		fprintf (stderr, "cpiTextSetMode(name=\"%s\"): name too long\n", name);
+		return;
+	}
 	if (!modeactive)
 	{
 		if (name && (cpiFocusHandle != name))
