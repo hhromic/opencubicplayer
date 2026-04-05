@@ -199,5 +199,6 @@ static void modland_com_setup_Run (void **token, const struct DevInterfaceAPI_t 
 					break;
 			}
 		}
+		framelock ();
 	}
 }
