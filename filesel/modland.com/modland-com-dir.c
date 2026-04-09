@@ -36,6 +36,7 @@ static const char *known_adlib_directories[] =
 	/* "DOSBox", should have worked, 2 of 2 fails to load */
 	"DeFy AdLib Tracker",
 	"Digital FM",
+	// "Drum Traker",
 	"EdLib D00",
 	/* "Edlib D01", includes PCM audio */
 	/* "EdLib Packed", includes PCM audio */
@@ -92,13 +93,14 @@ static const char *known_root_directories[] =
 	// "Aero Studio",
 	// "All Sound Tracker",
 	// "Anders Oland",
+	// "Archimedes Tracker",
 	// "ArkosTracker",
 	// "Arpeggiator",
 	// "Art And Magic",
 	// "Art Of Noise",
 	// "Astroidea XMF",
 	// "Asylum",
-	"Atari Digi-Mix",                     /* YM*/
+	"Atari Digi-Mix",                     /* YM */
 	// "Athtune",
 	// "Audio Sculpture",
 	// "BP SoundMon 2",
@@ -120,7 +122,7 @@ static const char *known_root_directories[] =
 	// "Composer 670 (CDFM)",
 	// "Compoz",
 	// "Core Design",
-	"Cubic Tiny XM",                      /* MXM     1 of 2 files are a broken, perhaps version 1.0 had different sample headers than laters versions? */
+	"Cubic Tiny XM",                      /* MXM     1 of 2 files are a broken, perhaps version 1.0 had different sample headers than later versions? */
 	// "CustomMade",
 	// "Cybertracker",
 	// "Cybertracker C64",
@@ -158,6 +160,7 @@ static const char *known_root_directories[] =
 	// "Dynamic Studio Professional",
 	// "Dynamic Synthesizer",
 	// "EarAche",
+	// "EasyTrax",
 	// "Electronic Music System",
 	// "Electronic Music System v6",
 	// "Epic Megagames MASI",
@@ -165,6 +168,7 @@ static const char *known_root_directories[] =
 	"Extreme Tracker",                   /* AMS */
 	// "FAC SoundTracker",
 	// "FM Tracker",
+	// "FM sound driver (FMP)", /* https://github.com/myon98/98fmplayer */
 	// "Face The Music",
 	// "FamiTracker",
 	// "Farandole Composer",
@@ -219,7 +223,7 @@ static const char *known_root_directories[] =
 	// "JayTrax",
 	// "Jeroen Tel",
 	// "Jesper Olsen",
-	// "KSS",                            /* KSS (Blaarg's game music emulator) <- only supports SEGA, and MSX that uses the internal AY chip. No support for ram-module, stereo, FM-PAC, MSX-AUDIO, etc. Only some few tunes inside "- unknown" works */
+	// "KSS",                            /* KSS (Blaarg's game music emulator) <- only supports SEGA, and MSX that uses the internal AY chip. No support for ram-module, stereo, FM-PAC, MSX-AUDIO, etc. nly some few tunes inside "- unknown" works */
 	// "Ken's Digital Music";
 	// "Klystrack",
 	// "Kris Hatlelid",
@@ -228,7 +232,9 @@ static const char *known_root_directories[] =
 	// "Liquid Tracker",
 	// "MCMD",
 	// "MDX",
+	// "MGSDRV", /* https://www.msx.org/taxonomy/term/1000/all */
 	// "MO3",
+	// "MPK", /* MSX */
 	// "MVS Tracker",
 	// "MVX Module",
 	// "Mad Tracker 2",
@@ -238,17 +244,20 @@ static const char *known_root_directories[] =
 	// "Mark Cooksey Old",
 	// "Mark II",
 	// "MaxTrax",
+	// "Maximum Effect",
 	// "Medley",
 	// "MegaStation",
 	// "MegaStation MIDI",
 	// "Megadrive CYM",
 	"Megadrive GYM",                     /* GYM (Blaarg's game music emulator) */
+	// "Megatracker", /* Apple IIgs MegaTracker ? */
 	"Multitracker",                      /* MTM */
 	// "MikMod UNITRK",
 	// "Mike Davies",
 	// "Monotone",
 	// "MoonBlaster",
 	// "MoonBlaster (edit mode)",
+	// "MuSICA", /* https://www.msx.org/wiki/MuSICA */
 	// "MultiMedia Sound",
 	// "Multitracker",
 	// "Music Assembler",
@@ -260,9 +269,11 @@ static const char *known_root_directories[] =
 	// "Nintendo DS Sound Format",
 	"Nintendo SPC",                      /* SPC (Blaarg's game music emulator) */
 	"Nintendo Sound Format",             /* NSF (Blaarg's game music emulator) */
+	// "Noise Tracker GS 1", /* Apple IIgs tracker created by Olivier Goguel */
 	// "NoiseTrekker",
 	// "NoiseTrekker 2",
 	// "NovoTrade Packer",
+	// "OPLLDRV", /* https://www.msx.org/wiki/MSX-MUSIC */
 	// "OctaMED MMD0",
 	// "OctaMED MMD1",
 	// "OctaMED MMD2",
@@ -274,7 +285,7 @@ static const char *known_root_directories[] =
 	// "OpenMPT MPTM",
 	// "Organya",
 	// "Organya 2",
-	// "PMD",
+	// "PMD", /* https://github.com/myon98/98fmplayer ? */
 	// "Paul Robotham",
 	// "Paul Shields",
 	// "Paul Summers",
@@ -284,7 +295,6 @@ static const char *known_root_directories[] =
 	// "Pierre Adane Packer",
 	// "Piston Collage",
 	// "Piston Collage Protected",
-	"PlaySID",                           /* SID */
 	// "PlayerPro",
 	// "Playstation 2 Sound Format",
 	// "Playstation Sound Format",
@@ -318,6 +328,7 @@ static const char *known_root_directories[] =
 	// "SC68",                           /* <-- https://github.com/Zeinok/sc68 */
 	// "SCC-Musixx",
 	// "SCUMM",
+	// "SGC", /* Small Games Cartridge, MSX */
 	"SNDH",                              /* SNDH, requires libancient 2.3.0, until files are updated (per 2026-03-12). Files are old v1.x compressed with ICE!, upstream database at https://sndh.atari.org/ are v2.2 without compression  */
 	// "SPU",
 	// "SVAr Tracker",
@@ -347,6 +358,7 @@ static const char *known_root_directories[] =
 	// "SoundFX",
 	// "SoundFactory",
 	// "SoundPlayer",
+	// "SoundSmith", /* Apple IIgs SoundSmith ? */
 	"Soundtracker",                      /* M15 */
 	// "Soundtracker 2.6",               /* <- different file format, just looks similiar to .MOD */
 	// "Soundtracker Pro II",            /* <- different file format, just looks similiar to .MOD */
@@ -384,6 +396,7 @@ static const char *known_root_directories[] =
 	// "Tunefish",
 	// "Ultra64 Sound Format",
 	"Ultratracker",                      /* ULT */
+	// "Unique Development",
 	"Unis 669",                          /* 669 */
 	// "V2",
 	// "VGM Music Maker",
