@@ -776,7 +776,7 @@ OCP_INTERNAL int sidGetLChanSample (struct cpifaceSessionAPI_t *cpifaceSession, 
 			}
 			if (!length1)
 			{
-				memset (s, 0, (len<<stereo)<<2);
+				memset (s, 0, len<<(stereo + 1));
 				return !!sidMuted[ch];
 			}
 		}

@@ -599,7 +599,7 @@ OCP_INTERNAL int hvlGetChanSample (struct cpifaceSessionAPI_t *cpifaceSession, u
 			}
 			if (!length1)
 			{
-				memset (s, 0, (len<<stereo)<<2);
+				memset (s, 0, len<<(stereo + 1));
 				return !!hvl_muted[ch];
 			}
 		}
