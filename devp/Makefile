@@ -139,7 +139,8 @@ devpdisk.o: devpdisk.c \
 	../filesel/filesystem.h \
 	../stuff/err.h \
 	../stuff/file.h \
-	../stuff/imsrtns.h
+	../stuff/imsrtns.h \
+	../stuff/utf-16.h
 	$(CC) devpdisk.c -o $@ -c
 
 devpalsa.o: devpalsa.c \

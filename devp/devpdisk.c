@@ -36,6 +36,10 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#ifdef _WIN32
+# include <windows.h>
+# include <fileapi.h>
+#endif
 #include "types.h"
 #include "boot/plinkman.h"
 #include "boot/psetting.h"
@@ -48,6 +52,7 @@
 #include "stuff/err.h"
 #include "stuff/file.h"
 #include "stuff/imsrtns.h"
+#include "stuff/utf-16.h"
 
 static const struct plrDriverAPI_t *plrDriverAPI;
 
@@ -65,6 +70,10 @@ static unsigned char bit16;
 static unsigned char writeerr;
 
 static const struct plrDriver_t plrDiskWriter;
+
+#ifdef _WIN32
+static char *basedir;
+#endif
 
 static void devpDiskConsume(int flush)
 {
@@ -275,15 +284,29 @@ static int devpDiskPlay (uint32_t *rate, enum plrRequestFormat *format, struct o
 			orig = "CPOUT";
 			i = 1;
 		}
+#ifdef _WIN32
+		fn = malloc (strlen (orig) + strlen(basedir) + 10);
+#else
 		fn = malloc (strlen (orig) + 10);
+#endif
+
 		for (; i<1000; i++)
 		{
 			if (i)
 			{
+#ifdef _WIN32
+				sprintf (fn, "%s%s%s-%03d.wav", basedir, (basedir[1] == ':' && basedir[3]) ? "\\" : "", orig, i);
+#else
 				sprintf (fn, "%s-%03d.wav", orig, i);
+#endif
 			} else {
+#ifdef _WIN32
+				sprintf (fn, "%s%s%s.wav", basedir, (basedir[1] == ':' && basedir[3]) ? "\\" : "", orig);
+#else
 				sprintf (fn, "%s.wav", orig);
+#endif
 			}
+
 			if ((devpDiskFileHandle=osfile_open_readwrite(fn, 0, 1)))
 				break;
 		}
@@ -454,7 +477,6 @@ static const struct plrDevAPI_t devpDisk = {
 static const struct plrDevAPI_t *dwInit (const struct plrDriver_t *driver, const struct plrDriverAPI_t *DriverAPI)
 {
 	plrDriverAPI = DriverAPI;
-
 	return &devpDisk;
 }
 
@@ -471,11 +493,41 @@ static int diskWriterPluginInit (struct PluginInitAPI_t *API)
 {
 	API->plrRegisterDriver (&plrDiskWriter);
 
+#ifdef _WIN32
+	uint16_t *wpath;
+	DWORD length;
+
+	if (!(length = GetCurrentDirectoryW (0, NULL)))
+	{
+		goto failed;
+	}
+	if (!(wpath = calloc (length, sizeof (uint16_t))))
+	{
+		goto failed;
+	}
+	if (GetCurrentDirectoryW (length, wpath) != (length - 1))
+	{
+		free (wpath);
+		goto failed;
+	}
+	basedir = utf16_to_utf8 (wpath);
+	free (wpath);
+failed:
+	if (!basedir)
+	{
+		basedir = strdup ("C:\\");
+	}
+#endif
+
 	return errOk;
 }
 
 static void diskWriterPluginClose (struct PluginCloseAPI_t *API)
 {
+#ifdef _WIN32
+	free (basedir);
+	basedir = 0;
+#endif
 	API->plrUnregisterDriver (&plrDiskWriter);
 }
 
