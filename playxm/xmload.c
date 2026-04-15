@@ -362,6 +362,7 @@ OCP_INTERNAL int xmpLoadModule (struct cpifaceSessionAPI_t *cpifaceSession, stru
 		{
 			if (ins1.size > sizeof(ins1))
 			{
+				cpifaceSession->cpiDebug (cpifaceSession, "[XM/XM] Warning, instrument %d/%d contains not samples, but %u extra bytes - skipping\n", i + 1, m->ninst, (unsigned int)(ins1.size - sizeof(ins1)));
 				if (file->seek_set (file, file->getpos (file) + ins1.size - sizeof(ins1)) < 0)
 				{
 					cpifaceSession->cpiDebug (cpifaceSession, "[XM/XM] seek failed #3\n");
@@ -600,6 +601,12 @@ bail2:
 			samp.samplen   = uint32_little (samp.samplen);
 			samp.loopstart = uint32_little (samp.loopstart);
 			samp.looplen   = uint32_little (samp.looplen);
+
+			if ((samp.res == 0xad) && !(samp.type & (/*16bit */ 16  | /* stereo */ 32)))
+			{
+#warning TODO add support for odPlug Tracker 4-bit ADPCM compressed sample
+				cpifaceSession->cpiDebug (cpifaceSession, "[XM/XM] Warning, ModPlug Tracker 4-bit ADPCM compressed sample detected\n");
+			}
 
 			if (file->seek_set (file, file->getpos (file) + ins2.shsize - sizeof (samp)) < 0)
 			{
