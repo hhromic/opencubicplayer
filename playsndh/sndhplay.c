@@ -1050,13 +1050,19 @@ OCP_INTERNAL int sndhGetPChanSample (struct cpifaceSessionAPI_t *cpifaceSession,
 	int length2 = RawAudio[1].fill;
 	uint32_t posf = 0;
 
+	if (!length1)
+	{
+		memset (s, 0, len<<(1 + stereo));
+		return 0;//!!sndh_muted[ch];
+	}
+
 	while (len)
 	{
 		if (stereo)
 		{
 			switch (ch)
 			{
-				case 0: s[0] = s[1] = (((uint16_t)(src->psg.lva.u8) << 8) | src->psg.lva.u8) ^ 0x8000; s+= 2; break;
+				case 0: s[0] = s[1] = (((uint16_t)(src->psg.lva.u8) << 8) | src->psg.lva.u8) ^ 0x8000; s += 2; break;
 				case 1: s[0] = s[1] = (((uint16_t)(src->psg.lvb.u8) << 8) | src->psg.lvb.u8) ^ 0x8000; s += 2; break;
 				case 2: s[0] = s[1] = (((uint16_t)(src->psg.lvc.u8) << 8) | src->psg.lvc.u8) ^ 0x8000; s += 2; break;
 				case 3: s[0] = s[1] = src->sound.left; s += 2; break;
@@ -1098,7 +1104,7 @@ OCP_INTERNAL int sndhGetPChanSample (struct cpifaceSessionAPI_t *cpifaceSession,
 					length2 = 0;
 					src = RawAudio[1].data;
 				} else {
-					memset (s, 0, (len<<stereo)<<2);
+					memset (s, 0, len<<(stereo + 1));
 					return 0;//!!sndh_muted[ch];
 				}
 			}
