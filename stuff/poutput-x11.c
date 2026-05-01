@@ -190,6 +190,8 @@ static void xvidmode_init(void)
 	default_modeline.vdisplay = xwa.height;
 	/* TODO */
 
+    fprintf(stderr, "[x11] [DEBUG] xvidmode = %d\n", cfGetProfileBool("x11", "xvidmode", 1, 0));
+
 	if ((!cfGetProfileBool("x11", "xvidmode", 1, 0)) )
 	{
 		if (!XF86VidModeQueryExtension(mDisplay, &xvidmode_event_base, &xvidmode_error_base))
